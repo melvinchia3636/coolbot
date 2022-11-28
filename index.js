@@ -3,6 +3,7 @@
 /* eslint-disable no-restricted-syntax */
 const fs = require('node:fs');
 const path = require('node:path');
+const http = require('node:http');
 const { Client, Events, GatewayIntentBits, Collection } = require('discord.js');
 const { token } = require('./config.json');
 
@@ -51,3 +52,11 @@ for (const file of commandFiles) {
 }
 
 client.login(token);
+
+http
+  .createServer((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.write('lmao');
+    res.end();
+  })
+  .listen(process.env.HTTP_PORT || 80);
